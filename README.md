@@ -1,4 +1,4 @@
-####Shiro OS
+Shiro OS
 
 Shiro is a minimalist, 64-bit operating system developed from the ground up with simplicity, efficiency, and modularity in mind. Built around the Limine bootloader, Shiro aims to provide a robust foundation for learning and exploring operating system concepts, while also supporting extensibility for future features like user-space applications, networking, and more.
 Features
