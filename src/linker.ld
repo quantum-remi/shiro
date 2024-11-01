@@ -9,60 +9,43 @@ ENTRY(kmain)
 /* process. */
 PHDRS
 {
-    requests PT_LOAD;
-    text     PT_LOAD;
-    rodata   PT_LOAD;
-    data     PT_LOAD;
+    null    PT_NULL    FLAGS(0) ;                  
+    text    PT_LOAD    FLAGS((1 << 0) | (1 << 2)) ;
+    rodata  PT_LOAD    FLAGS((1 << 2)) ;           
+    data    PT_LOAD    FLAGS((1 << 1) | (1 << 2)) ;
+    dynamic PT_DYNAMIC FLAGS((1 << 1) | (1 << 2)) ;
 }
 
 SECTIONS
 {
-    /* We want to be placed in the topmost 2GiB of the address space, for optimisations */
-    /* and because that is what the Limine spec mandates. */
-    /* Any address in this region will do, but often 0xffffffff80000000 is chosen as */
-    /* that is the beginning of the region. */
-    . = 0xffffffff80000000;
-
-    /* Define a section to contain the Limine requests and assign it to its own PHDR */
-    .requests : {
-        KEEP(*(.requests_start_marker))
-        KEEP(*(.requests))
-        KEEP(*(.requests_end_marker))
-    } :requests
-
-    /* Move to the next memory page for .text */
-    . = ALIGN(CONSTANT(MAXPAGESIZE));
-
+    . = 0xffffffff80200000;
+ 
     .text : {
-        *(.text .text.*)
+        *(.text*)
     } :text
-
-    /* Move to the next memory page for .rodata */
-    . = ALIGN(CONSTANT(MAXPAGESIZE));
-
-    .rodata : {
-        *(.rodata .rodata.*)
+ 
+    . += 0x1000;
+ 
+    .stivale2hdr : {
+        KEEP(*(.stivale2hdr))
     } :rodata
-
-    /* Move to the next memory page for .data */
-    . = ALIGN(CONSTANT(MAXPAGESIZE));
-
+ 
+    .rodata : {
+        *(.rodata*)
+    } :rodata
+ 
+    . += 0x1000;
+ 
     .data : {
-        *(.data .data.*)
+        *(.data*)
     } :data
-
-    /* NOTE: .bss needs to be the last thing mapped to :data, otherwise lots of */
-    /* unnecessary zeros will be written to the binary. */
-    /* If you need, for example, .init_array and .fini_array, those should be placed */
-    /* above this. */
+ 
+    .dynamic : {
+        *(.dynamic)
+    } :data :dynamic
+ 
     .bss : {
-        *(.bss .bss.*)
         *(COMMON)
+        *(.bss*)
     } :data
-
-    /* Discard .note.* and .eh_frame* since they may cause issues on some hosts. */
-    /DISCARD/ : {
-        *(.eh_frame*)
-        *(.note .note.*)
-    }
 }

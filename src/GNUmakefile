@@ -92,6 +92,7 @@ override KLDFLAGS += \
     -gc-sections \
     -T linker.ld
 
+
 # Use "find" to glob all *.c, *.S, and *.asm files in the tree and obtain the
 # object and header dependency file names.
 override CFILES := $(shell find -L * -type f -name '*.c' | LC_ALL=C sort)
