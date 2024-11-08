@@ -1,5 +1,5 @@
-#include <log/debug.h>
-#include <log/log.h>
+#include <drivers/log/debug.h>
+#include <drivers/log/log.h>
 #include <tests/unit_test.h>
 
 unit_test_t tests[MAX_TESTS];

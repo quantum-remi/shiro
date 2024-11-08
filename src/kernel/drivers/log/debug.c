@@ -1,5 +1,5 @@
 #include <drivers/com/serial.h>
-#include <log/debug.h>
+#include <drivers/log/debug.h>
 #include <libs/kprintf/kprintf.h>
 
 

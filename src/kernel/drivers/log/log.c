@@ -1,6 +1,6 @@
 #include <libs/kprintf/kprintf.h>
-#include <log/debug.h>
-#include <log/log.h>
+#include <drivers/log/debug.h>
+#include <drivers/log/log.h>
 
 char log_buffer[5120];
 

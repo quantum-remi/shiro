@@ -38,9 +38,9 @@ void pic_init(void)
     asm_io_outb(PIC2_COMMAND, 0x00);
     asm_io_wait();
 
-    asm_io_outb(PIC1_DATA, ICW4_8086);
+    asm_io_outb(PIC1_DATA, ICW1_8086);
     asm_io_wait();
-    asm_io_outb(PIC2_DATA, ICW4_8086);
+    asm_io_outb(PIC2_DATA, ICW1_8086);
     asm_io_wait();
 
     asm_io_outb(PIC1_DATA, mask1);

@@ -2,8 +2,8 @@
 #include <stddef.h>
 
 
-#include <log/debug.h>
-#include <log/log.h>
+#include <drivers/log/debug.h>
+#include <drivers/log/log.h>
 #include <tables/gdt.h>
 /*#include <tests/unit_test.h> */
 
