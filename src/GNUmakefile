@@ -81,8 +81,10 @@ override KCPPFLAGS := \
 # Internal nasm flags that should not be changed by the user.
 override KNASMFLAGS += \
     -Wall \
-    -f elf64
-
+    -f elf64 \
+    -F dwarf \
+    -g \
+    
 # Internal linker flags that should not be changed by the user.
 override KLDFLAGS += \
     -m elf_x86_64 \
